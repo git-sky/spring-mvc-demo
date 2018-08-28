@@ -1,0 +1,9 @@
+//register
+{
+  "name": "sky",
+  "password": "123456",
+  "height": 175,
+  "weight": 70,
+  "sex": 0,
+  "birthday": "1988-12-12 09:21:21"
+}

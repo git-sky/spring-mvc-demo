@@ -7,10 +7,10 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
 
 	<!-- 配置自动扫描的包 -->
-	<context:component-scan base-package="cn.com.web" />
+	<context:component-scan base-package="cn.com.sky" />
 
 
-	<bean id="myHandlerInterceptor" class="cn.com.sky.web.HandlerAdapter.MyHandlerInterceptor"/>
+	<bean id="myHandlerInterceptor" class="cn.com.sky.custom.MyHandlerInterceptor"/>
 
 	<!-- 此处也可以不写，因为spring默认使用BeanNameUrlHandlerMapping。 (web请求<->controller(或者Handler)) -->
 	<bean

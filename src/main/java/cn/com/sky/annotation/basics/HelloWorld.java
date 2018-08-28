@@ -19,7 +19,7 @@ public class HelloWorld {
 	@RequestMapping("/hello")
 	public String hello() {
 		System.out.println("hello, springMVC!");
-		return "/first";
+		return "first";
 	}
 	// 返回了一个baymax，对应了哪个页面呢？还需要在springmvc.xml的配置视图解析
 
