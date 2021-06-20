@@ -3,6 +3,7 @@ package cn.com.sky.market.model;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -18,7 +19,7 @@ public class TestUser {
 
 
         ObjectMapper objectMapper = new ObjectMapper();
-//        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         try {
             String json = objectMapper.writeValueAsString(user);
             System.out.println(json);

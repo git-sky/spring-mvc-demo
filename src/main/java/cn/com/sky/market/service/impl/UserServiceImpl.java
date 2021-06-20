@@ -4,12 +4,11 @@ import cn.com.sky.market.dao.IUserDao;
 import cn.com.sky.market.model.User;
 import cn.com.sky.market.model.UserReq;
 import cn.com.sky.market.service.IUserService;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
 
-@Service
+//@Service
 public class UserServiceImpl implements IUserService {
 
     @Resource

@@ -2,18 +2,22 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:beans="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       ">
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- 配置自动扫描的包 -->
-    <context:component-scan base-package="cn.com.sky"/>
+    <!--&lt;!&ndash; 配置自动扫描的包 &ndash;&gt;-->
+    <!--<context:component-scan base-package="cn.com.sky" use-default-filters="false">-->
+        <!--<context:include-filter type="annotation"-->
+        <!--expression="org.springframework.stereotype.Controller"></context:include-filter>-->
+        <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"></context:include-filter>-->
+    <!--</context:component-scan>-->
+
+
+    <context:component-scan base-package="cn.com.sky"></context:component-scan>
 
     <!-- 此处也可以不写，因为spring默认使用BeanNameUrlHandlerMapping。 (web请求<->controller(或者Handler)) -->
     <!-- 	<bean
@@ -27,42 +31,43 @@
     <!--</bean>-->
 
     <!-- 扫描接口包 -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="cn.com.sky.market.mapper"/>
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-    </bean>
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--<property name="basePackage" value="cn.com.sky.market.mapper"/>-->
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
+    <!--</bean>-->
 
-    <!-- 集成myBaits框架,配置sqlSessionFatory -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" scope="singleton">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:mybatis-config.xml"/>
-        <property name="typeAliasesPackage" value="cn.com.sky.market.model"/>
-        <!-- 自动扫描mapping.xml文件 -->
-        <property name="mapperLocations" value="classpath*:mapper/*.xml"/>
-    </bean>
-
-
-    <!-- 数据源 -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName">
-            <value>${jdbc.driverClassName}</value>
-        </property>
-        <property name="url">
-            <value>${jdbc.url}</value>
-        </property>
-        <property name="username">
-            <value>${jdbc.username}</value>
-        </property>
-        <property name="password">
-            <value>${jdbc.password}</value>
-        </property>
-    </bean>
-
-    <!-- UTF-8保证中文不会乱码 -->
-    <context:property-placeholder ignore-resource-not-found="true" location="classpath:config/*.properties" file-encoding="UTF-8"/>
+    <!--&lt;!&ndash; 集成myBaits框架,配置sqlSessionFatory &ndash;&gt;-->
+    <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" scope="singleton">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+        <!--<property name="configLocation" value="classpath:mybatis-config.xml"/>-->
+        <!--<property name="typeAliasesPackage" value="cn.com.sky.market.model"/>-->
+        <!--&lt;!&ndash; 自动扫描mapping.xml文件 &ndash;&gt;-->
+        <!--<property name="mapperLocations" value="classpath*:mapper/*.xml"/>-->
+    <!--</bean>-->
 
 
-    <mvc:annotation-driven/>
+    <!--&lt;!&ndash; 数据源 &ndash;&gt;-->
+    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+        <!--<property name="driverClassName">-->
+            <!--<value>${jdbc.driverClassName}</value>-->
+        <!--</property>-->
+        <!--<property name="url">-->
+            <!--<value>${jdbc.url}</value>-->
+        <!--</property>-->
+        <!--<property name="username">-->
+            <!--<value>${jdbc.username}</value>-->
+        <!--</property>-->
+        <!--<property name="password">-->
+            <!--<value>${jdbc.password}</value>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; UTF-8保证中文不会乱码 &ndash;&gt;-->
+    <!--<context:property-placeholder ignore-resource-not-found="true" location="classpath:config/*.properties"-->
+                                  <!--file-encoding="UTF-8"/>-->
+
+
+    <!--<mvc:annotation-driven/>-->
 
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">
@@ -79,5 +84,37 @@
             </beans:bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
+    <!--<bean name="/helloWorldController" class="cn.com.sky.controller.HelloWorldController"/>-->
+
+    <!-- 配置Controller bean -->
+    <bean name="/helloWorldController" class="cn.com.sky.controller.HelloWorldController">
+        <!-- 设置支持的请求方法类型，如下支持PUT、POST -->
+        <property name="supportedMethods">
+            <set>
+                <value>PUT</value>
+                <value>POST</value>
+            </set>
+        </property>
+    </bean>
+
+    <!-- 定义映射处理器 -->
+    <bean id="handlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="urlMap">
+            <props>
+                <prop key="/demo">demoController</prop>
+            </props>
+        </property>
+        <!-- 设置顺序，在多个映射处理器时用于排序，可不设置 -->
+        <property name="order" value="1"/>
+    </bean>
+
+    <bean id="demoController" class="cn.com.sky.controller.DemoController"/>
+
+
+
+    <!--<bean id="localResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">-->
+        <!--<property name="defaultLocale" value="zh_CN"/>-->
+    <!--</bean>-->
 
 </beans>

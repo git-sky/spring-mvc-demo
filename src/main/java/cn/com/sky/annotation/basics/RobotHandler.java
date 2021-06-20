@@ -1,7 +1,5 @@
 package cn.com.sky.annotation.basics;
 
-import java.lang.annotation.Retention;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -26,23 +24,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/c1")
 @Controller
 public class RobotHandler {
-	
-	@RequestMapping("/m1")
-	String handle1()
-	{
-		return "robot_baymax1";
-	}
-	
-	@RequestMapping("/m2")
-	String handle2()
-	{
-		return "robot_baymax2";
-	}
-	
-	
-	@RequestMapping("/m3")
-	String handle3()
-	{
-		return "robot_baymax3";
-	}
+
+    @RequestMapping("/m1")
+    String handle1() {
+        return "robot_baymax1";
+    }
+
+    @RequestMapping("/m2")
+    String handle2() {
+        return "robot_baymax2";
+    }
+
+
+    @RequestMapping("/m3")
+    String handle3() {
+        return "robot_baymax3";
+    }
 }

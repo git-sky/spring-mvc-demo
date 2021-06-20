@@ -12,7 +12,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>4.3.17.RELEASE</spring.version>
+        <spring.version>5.2.12.RELEASE</spring.version>
+        <!--<spring.version>4.3.30.RELEASE</spring.version>-->
+        <!--<spring.version>3.2.18.RELEASE</spring.version>-->
+
         <jackson.core.version>2.9.3</jackson.core.version>
         <mybatis.version>3.2.3</mybatis.version>
 
@@ -76,35 +79,89 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc-portlet -->
-        <!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-webmvc-portlet</artifactId>
-            <version>${spring.version}</version> </dependency> -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc-portlet -->
+        <!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-webmvc-portlet</artifactId>
+            <version>${spring.version}</version> </dependency> -->
 
+
+        <!--servlet-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+        <!--<dependency>-->
+        <!--<groupId>org.eclipse.jetty</groupId>-->
+        <!--<artifactId>jetty-maven-plugin</artifactId>-->
+        <!--&lt;!&ndash;<version>9.4.27.v20200227</version>&ndash;&gt;-->
+        <!--<version>9.4.27.v20200227</version>-->
+        <!--<exclusions>-->
+        <!--<exclusion>-->
+        <!--<artifactId>guava</artifactId>-->
+        <!--<groupId>com.google.guava</groupId>-->
+        <!--</exclusion>-->
+        <!--<exclusion>-->
+        <!--<artifactId>junit</artifactId>-->
+        <!--<groupId>junit</groupId>-->
+        <!--</exclusion>-->
+        <!--<exclusion>-->
+        <!--<artifactId>commons-lang3</artifactId>-->
+        <!--<groupId>org.apache.commons</groupId>-->
+        <!--</exclusion>-->
+        <!--<exclusion>-->
+        <!--<artifactId>maven-artifact</artifactId>-->
+        <!--<groupId>org.apache.maven</groupId>-->
+        <!--</exclusion>-->
+        <!--<exclusion>-->
+        <!--<artifactId>maven-core</artifactId>-->
+        <!--<groupId>org.apache.maven</groupId>-->
+        <!--</exclusion>-->
+        <!--<exclusion>-->
+        <!--<artifactId>maven-model</artifactId>-->
+        <!--<groupId>org.apache.maven</groupId>-->
+        <!--</exclusion>-->
+        <!--<exclusion>-->
+        <!--<artifactId>maven-plugin-api</artifactId>-->
+        <!--<groupId>org.apache.maven</groupId>-->
+        <!--</exclusion>-->
+        <!--</exclusions>-->
+        <!--</dependency>-->
 
         <!--junit-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>4.12</version>
             <scope>test</scope>
         </dependency>
 
-        <!--log-->
-        <!--<dependency>-->
-            <!--<groupId>org.slf4j</groupId>-->
-            <!--<artifactId>slf4j-log4j12</artifactId>-->
-            <!--<version>1.7.2</version>-->
-        <!--</dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.25</version>
+            <scope>test</scope>
+        </dependency>
+
 
         <!--<dependency>-->
-            <!--<groupId>commons-dbcp</groupId>-->
-            <!--<artifactId>commons-dbcp</artifactId>-->
-            <!--<version>1.4</version>-->
+        <!--<groupId>commons-dbcp</groupId>-->
+        <!--<artifactId>commons-dbcp</artifactId>-->
+        <!--<version>1.4</version>-->
         <!--</dependency>-->
 
 
@@ -117,10 +174,17 @@
 
 
         <!--cglib-->
+        <!--<dependency>-->
+            <!--<groupId>cglib</groupId>-->
+            <!--<artifactId>cglib</artifactId>-->
+            <!--<version>2.2.2</version>-->
+        <!--</dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/cglib/cglib -->
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
-            <version>2.2.2</version>
+            <version>3.3.0</version>
         </dependency>
 
 
@@ -131,19 +195,17 @@
             <version>1.0.18</version>
         </dependency>
 
-        <!--servlet-->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-
-
         <!--jackson-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.core.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jackson-annotations</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -162,6 +224,7 @@
             <artifactId>mybatis</artifactId>
             <version>${mybatis.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
@@ -182,11 +245,51 @@
             </exclusions>
         </dependency>
 
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/com.google.guava/guava &ndash;&gt;-->
+        <!--<dependency>-->
+        <!--<groupId>com.google.guava</groupId>-->
+        <!--<artifactId>guava</artifactId>-->
+        <!--<version>30.1-jre</version>-->
+        <!--</dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>28.2-jre</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.11</version>
+        </dependency>
+
 
     </dependencies>
 
+
     <build>
         <plugins>
+
+            <plugin>
+                <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server -->
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.27.v20200227</version>
+
+                <!--<configuration>-->
+                    <!--<httpConnector>-->
+                        <!--<port>8899</port>-->
+                    <!--</httpConnector>-->
+                    <!--<webAppConfig>-->
+                        <!--<contextPath>/</contextPath>-->
+                    <!--</webAppConfig>-->
+                <!--</configuration>-->
+
+            </plugin>
+
             <!-- 编译插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -200,22 +303,6 @@
             </plugin>
 
 
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.3.v20170317</version>
-                <!-- Config: contextPath and Port (Default:8080) -->
-                <!--
-                <configuration>
-                    <httpConnector>
-                        <port>8899</port>
-                    </httpConnector>
-                    <webAppConfig>
-                        <contextPath>/</contextPath>
-                    </webAppConfig>
-                </configuration>
-                 -->
-            </plugin>
         </plugins>
     </build>
 

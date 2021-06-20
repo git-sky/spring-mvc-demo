@@ -4,11 +4,10 @@ import cn.com.sky.market.dao.IUserDao;
 import cn.com.sky.market.mapper.UserMapper;
 import cn.com.sky.market.model.User;
 import cn.com.sky.market.model.UserReq;
-import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 
-@Repository
+//@Repository
 public class UserDaoImpl implements IUserDao {
 
     @Resource
